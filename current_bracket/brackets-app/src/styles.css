@@ -4,3 +4,5 @@ html { background-color: rgb(194, 194, 194); }
 
 /* not implemented yet */
 /* @import '~ng-tournament-tree/styles/ngtt-styles' */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
