@@ -7,6 +7,10 @@ export class SendMatchesService {
 
   constructor(private http: HttpClient) { }
 
+  matchList: any = [
+  this.http.get(`${environment.serverUrl}/sendMatches`)
+  ]
+
   getTitle() {
     return this.http.get(`${environment.serverUrl}/sendMatches`);
   }
