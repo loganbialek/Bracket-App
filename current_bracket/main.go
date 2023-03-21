@@ -1,26 +1,22 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"utils"
 
 	"example.com/api/app"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
 
-type Member struct {
-	name string
-}
-
 type Match struct {
-	member1     Member
-	member2     Member
-	member1Wins uint
-	member2Wins uint
+	Member1     string `json:"Member1"`
+	Member2     string `json:"Member2"`
+	Member1Wins int    `json:"Member1Wins"`
+	Member2Wins int    `json:"Member2Wins"`
 }
 
 func main() {
@@ -31,8 +27,7 @@ func main() {
 
 	var rs int = int(rounds)
 	var matches = make([]Match, 0)
-	UNINITIALIZED_MEMBER := Member{name: "UNINITIALIZED"}
-	UNINITIALIZED_MATCH := Match{member1: UNINITIALIZED_MEMBER, member2: UNINITIALIZED_MEMBER, member1Wins: 0, member2Wins: 0}
+	UNINITIALIZED_MATCH := Match{Member1: "UNINITIALIZED", Member2: "UNINITIALIZED", Member1Wins: 0, Member2Wins: 0}
 
 	for i := 0; i < rs; i++ {
 		matches = append(matches, UNINITIALIZED_MATCH)
@@ -41,12 +36,12 @@ func main() {
 	fmt.Println(len(matches))
 
 	for i := 0; i < rs; i++ {
-		fmt.Println(matches[i].member1.name + " " + matches[i].member2.name + "asd")
+		fmt.Println(matches[i].Member1 + " " + matches[i].Member2 + "asd")
 	}
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", sendMatches(matches))
+	r.HandleFunc("/sendMatches", sendMatches(matches))
 	//r.HandleFunc("/create-account", createAccount)
 	//r.HandleFunc("/delete-account", deleteAccount)
 
@@ -71,8 +66,13 @@ func main() {
 
 func sendMatches(m []Match) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		/*
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(m)
+			return
+		*/
 
-		jsonBytes, err := json.Marshal(m)
+		jsonBytes, err := utils.StructToJSON(m)
 		if err != nil {
 			fmt.Print(err)
 		}
@@ -81,4 +81,5 @@ func sendMatches(m []Match) http.HandlerFunc {
 		w.Write(jsonBytes)
 		return
 	}
+
 }

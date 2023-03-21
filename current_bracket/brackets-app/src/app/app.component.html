@@ -292,10 +292,6 @@
 
 <div class="content" role="main">
 
-  <li *ngFor="let match of matchList">
-
-  </li>
-
 
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
@@ -311,7 +307,13 @@
 
   <!-- Start Prompt -->
   <h2>Get Started</h2>
-  <p>Enter Your Information below</p>
+  <p>Enter Your Information below
+
+    <li *ngFor="let match of matchList">
+      {{ match['Member1'] }}
+    </li>
+  </p>
+
 
   
   <!-- Next Steps -->

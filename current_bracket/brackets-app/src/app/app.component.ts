@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../environments/environment';
+import { SendMatchesService } from './send-matches.service';
 
 export interface PeriodicElement {
   name: string;
@@ -6,6 +9,15 @@ export interface PeriodicElement {
   score: number;
   
 }
+
+interface Match {
+  Member1:     string;
+	Member2:     string;
+	Member1Wins: number;
+	Member2Wins: number;
+}
+
+
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Gators', score: 100.79},
   {position: 2, name: 'Bucks', score: 90.26},
@@ -18,11 +30,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [SendMatchesService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'brackets-app';
   displayedColumns: string[] = ['position', 'name', 'weight'];
   dataSource = ELEMENT_DATA;
-  
+
+  matchList: Match[] = [];
+
+  constructor(private sm: SendMatchesService) {}
+
+  ngOnInit() {
+    // Read from getTitle which is on backend API. Convert back from JSON into a struct
+    this.matchList = this.sm.getTitle()
+  }
 }

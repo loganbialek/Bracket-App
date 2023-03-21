@@ -2,17 +2,26 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 
+interface Match {
+  Member1:     string;
+	Member2:     string;
+	Member1Wins: number;
+	Member2Wins: number;
+}
+
 @Injectable()
 export class SendMatchesService {
 
+  matchList: Match[] = [];
+
   constructor(private http: HttpClient) { }
 
-  matchList: any = [
-  this.http.get(`${environment.serverUrl}/sendMatches`)
-  ]
-
   getTitle() {
-    return this.http.get(`${environment.serverUrl}/sendMatches`);
+    //return this.http.get(`${environment.serverUrl}/hello-world`);
+    this.http.get<Match[]>(`${environment.serverUrl}/hello-world`).subscribe((data) => {
+      this.matchList = data;
+    });
+    return this.matchList;
   }
 
 }
