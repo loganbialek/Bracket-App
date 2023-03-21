@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -28,24 +29,24 @@ func main() {
 	fmt.Print("Type a number of rounds: ")
 	fmt.Scan(&rounds)
 
-	var r int = int(rounds)
+	var rs int = int(rounds)
 	var matches = make([]Match, 0)
 	UNINITIALIZED_MEMBER := Member{name: "UNINITIALIZED"}
 	UNINITIALIZED_MATCH := Match{member1: UNINITIALIZED_MEMBER, member2: UNINITIALIZED_MEMBER, member1Wins: 0, member2Wins: 0}
 
-	for i := 0; i < r; i++ {
+	for i := 0; i < rs; i++ {
 		matches = append(matches, UNINITIALIZED_MATCH)
 	}
 
 	fmt.Println(len(matches))
 
-	for i := 0; i < r; i++ {
+	for i := 0; i < rs; i++ {
 		fmt.Println(matches[i].member1.name + " " + matches[i].member2.name + "asd")
 	}
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/hello-world", helloWorld)
+	r.HandleFunc("/", sendMatches(matches))
 	//r.HandleFunc("/create-account", createAccount)
 	//r.HandleFunc("/delete-account", deleteAccount)
 
@@ -66,4 +67,18 @@ func main() {
 	app := &app.App{}
 	app.Initialize()
 	app.Run(":3000")
+}
+
+func sendMatches(m []Match) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		jsonBytes, err := json.Marshal(m)
+		if err != nil {
+			fmt.Print(err)
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(jsonBytes)
+		return
+	}
 }
