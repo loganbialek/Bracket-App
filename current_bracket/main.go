@@ -2,8 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"os"
 
 	"example.com/api/app"
+	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 type Member struct {
@@ -37,6 +42,25 @@ func main() {
 	for i := 0; i < r; i++ {
 		fmt.Println(matches[i].member1.name + " " + matches[i].member2.name + "asd")
 	}
+
+	r := mux.NewRouter()
+
+	r.HandleFunc("/hello-world", helloWorld)
+	//r.HandleFunc("/create-account", createAccount)
+	//r.HandleFunc("/delete-account", deleteAccount)
+
+	// Solves Cross Origin Access Issue
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:4200"},
+	})
+	handler := c.Handler(r)
+
+	srv := &http.Server{
+		Handler: handler,
+		Addr:    ":" + os.Getenv("PORT"),
+	}
+	//fmt.Print(srv.Addr)
+	log.Fatal(srv.ListenAndServe())
 
 	fmt.Println("Hello!")
 	app := &app.App{}
