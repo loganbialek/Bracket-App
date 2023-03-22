@@ -60,6 +60,9 @@ export class AppComponent implements OnInit {
     );
     this.ngOnInit();
   }
+  createPairings(){
+    this.cbs.createPairings();
+  }
 
   getTeamsList() {
     for (let i = 0; i < this.cbs.getTeamsList().length; i++) {
