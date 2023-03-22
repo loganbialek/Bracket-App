@@ -41,6 +41,8 @@ func main() {
 
 	r := mux.NewRouter()
 
+	rs = 8
+	r.HandleFunc("/hello-world", helloWorld(rs))
 	r.HandleFunc("/sendMatches", sendMatches(matches))
 	//r.HandleFunc("/create-account", createAccount)
 	//r.HandleFunc("/delete-account", deleteAccount)
@@ -73,6 +75,31 @@ func sendMatches(m []Match) http.HandlerFunc {
 		*/
 
 		jsonBytes, err := utils.StructToJSON(m)
+		if err != nil {
+			fmt.Print(err)
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(jsonBytes)
+		return
+	}
+
+}
+
+func helloWorld(rs int) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		/*
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(m)
+			return
+		*/
+		var data = struct {
+			Rounds string `json:"rounds"`
+		}{
+			Rounds: string(rs),
+		}
+
+		jsonBytes, err := utils.StructToJSON(data)
 		if err != nil {
 			fmt.Print(err)
 		}

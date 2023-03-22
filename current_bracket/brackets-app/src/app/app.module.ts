@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SendMatchesService } from './send-matches.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HelloWorldService } from './hello-world.service';
+import { CreateBracketService } from './create-bracket.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,11 @@ import { HttpClientModule } from '@angular/common/http';
      
     
   ],
-  providers: [SendMatchesService],
+  providers: [
+    SendMatchesService,
+    HelloWorldService,
+    CreateBracketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

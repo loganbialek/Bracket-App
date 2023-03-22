@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import { SendMatchesService } from './send-matches.service';
+import { HelloWorldService } from './hello-world.service';
+import { CreateBracketService } from './create-bracket.service';
 
 export interface PeriodicElement {
   name: string;
@@ -33,28 +35,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./app.component.css'],
   //providers: [SendMatchesService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'brackets-app';
   displayedColumns: string[] = ['position', 'name', 'weight'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private sm: SendMatchesService) {}
+  Rounds:string = "";
 
-  matchList = this.sm.getTitle();
-  //constructor(private sm: SendMatchesService) {}
- /*
-     <li *ngFor="let match of matchList">
-      {{ match['Member1'] }}
-    </li>
-
-
-  matchList: Match[] = [];
-
- 
+  constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
 
   ngOnInit() {
+    
     // Read from getTitle which is on backend API. Convert back from JSON into a struct
-    this.matchList = 
+    this.Rounds = this.cbs.getRounds();
   }
-  */
+
+  @ViewChild('roundsInput')
+  roundsInputReference!: ElementRef;
+
+  createBracket() {
+    this.cbs.createBracket(
+      this.roundsInputReference.nativeElement.value
+    );
+  }
 }
