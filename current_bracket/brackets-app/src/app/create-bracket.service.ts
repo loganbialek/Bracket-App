@@ -58,5 +58,14 @@ export class CreateBracketService {
     for (let i = 0; i < Teams; i++) {
       console.log(this.b.TeamsList[i]);
     }
+
+
+
+  }
+
+  creatPairings(){
+    for (let i = 0; i < this.b.TeamsList.length / 2; i++) {
+      this.b.MatchList[i] = new Match(this.b.TeamsList[i], this.b.TeamsList[i+1],0,0);
+    }
   }
 }
