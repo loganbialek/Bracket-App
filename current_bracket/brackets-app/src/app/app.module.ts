@@ -8,6 +8,8 @@ import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SendMatchesService } from './send-matches.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     MatSlideToggleModule,
     MatTableModule,
+    HttpClientModule,
     BrowserAnimationsModule
      
     
   ],
-  providers: [],
+  providers: [SendMatchesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

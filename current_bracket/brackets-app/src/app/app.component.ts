@@ -31,19 +31,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [SendMatchesService]
+  //providers: [SendMatchesService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'brackets-app';
   displayedColumns: string[] = ['position', 'name', 'weight'];
   dataSource = ELEMENT_DATA;
 
+  constructor(private sm: SendMatchesService) {}
+
+  matchList = this.sm.getTitle();
+  //constructor(private sm: SendMatchesService) {}
+ /*
+     <li *ngFor="let match of matchList">
+      {{ match['Member1'] }}
+    </li>
+
+
   matchList: Match[] = [];
 
-  constructor(private sm: SendMatchesService) {}
+ 
 
   ngOnInit() {
     // Read from getTitle which is on backend API. Convert back from JSON into a struct
-    this.matchList = this.sm.getTitle()
+    this.matchList = 
   }
+  */
 }

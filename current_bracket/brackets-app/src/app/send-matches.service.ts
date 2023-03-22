@@ -18,9 +18,10 @@ export class SendMatchesService {
 
   getTitle() {
     //return this.http.get(`${environment.serverUrl}/hello-world`);
-    this.http.get<Match[]>(`${environment.serverUrl}/hello-world`).subscribe((data) => {
+    this.http.get<Match[]>(`${environment.serverUrl}/sendMatches`).subscribe((data) => {
       this.matchList = data;
     });
+    console.log(this.matchList);
     return this.matchList;
   }
 
