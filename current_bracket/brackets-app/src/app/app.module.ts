@@ -10,10 +10,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SendMatchesService } from './send-matches.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BracketComponent } from './bracket/bracket.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BracketComponent
   ],
 
   imports: [

@@ -1,0 +1,12 @@
+<ul>
+    <li *ngFor="let matchup of bracket?.matchups">
+      <div>{{ matchup.id }}</div>
+      <div>{{ getTeamName(matchup.team1_id) }} vs {{ getTeamName(matchup.team2_id) }}</div>
+      <div>
+        <button *ngIf="!matchup.winner_team_id" (click)="updateMatchup(matchup, matchup.team1_id)">Select {{ getTeamName(matchup.team1_id) }}</button>
+        <button *ngIf="!matchup.winner_team_id" (click)="updateMatchup(matchup, matchup.team2_id)">Select {{ getTeamName(matchup.team2_id) }}</button>
+        <span *ngIf="matchup.winner_team_id">Winner: {{ getTeamName(matchup.winner_team_id) }}</span>
+      </div>
+    </li>
+  </ul>
+  
