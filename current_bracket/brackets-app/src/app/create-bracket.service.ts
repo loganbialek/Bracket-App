@@ -35,6 +35,7 @@ class Bracket {
 
 export class CreateBracketService {
   b = new Bracket(0);
+  
   getMatchList() {
     return this.b.MatchList;
   }
@@ -51,8 +52,11 @@ export class CreateBracketService {
     // simple check, title must be at least 1 char
     this.b.Teams = Teams;
     console.log(Teams)
-    for (let i = 0; i < Teams; i++) {
+    for (let i = 1; i <= Teams; i++) {
       this.b.TeamsList.push("Team " + i.toString());
+    }
+    for (let i = 0; i < Teams; i++) {
+      console.log(this.b.TeamsList[i]);
     }
   }
 }

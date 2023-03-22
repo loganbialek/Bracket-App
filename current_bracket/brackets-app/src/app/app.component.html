@@ -328,8 +328,12 @@
     #roundsInput />
   <button (click)="createBracket()">Add Teams</button> 
 
-    
 
+  <div *ngIf="TeamsList" class="wrapper">
+    <div *ngFor="let team of TeamsList" class="team">
+      {{ team }}
+    </div>
+  </div>
  
 
   <!-- ToggleButtons -->

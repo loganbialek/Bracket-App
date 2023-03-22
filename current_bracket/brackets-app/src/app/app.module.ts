@@ -12,10 +12,14 @@ import { SendMatchesService } from './send-matches.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HelloWorldService } from './hello-world.service';
 import { CreateBracketService } from './create-bracket.service';
+import { AwsComponent } from './aws/aws.component';
+import { AngularComponent } from './angular/angular.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AwsComponent,
+    AngularComponent
   ],
 
   imports: [

@@ -41,18 +41,16 @@ export class AppComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   Teams:string = "";
-  
+  TeamsList: string[] | undefined;
 
   constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
 
   ngOnInit() {
     
     // Read from getTitle which is on backend API. Convert back from JSON into a struct
-    this.Teams = this.cbs.getTeams();
+    this.TeamsList = this.cbs.getTeamsList();
   }
 
- 
-  
   @ViewChild('roundsInput')
   roundsInputReference!: ElementRef;
 
@@ -60,5 +58,13 @@ export class AppComponent implements OnInit {
     this.cbs.createBracket(
       this.roundsInputReference.nativeElement.value
     );
+    this.ngOnInit();
+  }
+
+  getTeamsList() {
+    for (let i = 0; i < this.cbs.getTeamsList().length; i++) {
+      console.log(this.cbs.getTeamsList()[i]);
+    }
+    return this.cbs.getTeamsList();
   }
 }
