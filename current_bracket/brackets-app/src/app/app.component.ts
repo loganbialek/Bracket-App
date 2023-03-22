@@ -40,16 +40,19 @@ export class AppComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight'];
   dataSource = ELEMENT_DATA;
 
-  Rounds:string = "";
+  Teams:string = "";
+  
 
   constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
 
   ngOnInit() {
     
     // Read from getTitle which is on backend API. Convert back from JSON into a struct
-    this.Rounds = this.cbs.getRounds();
+    this.Teams = this.cbs.getTeams();
   }
 
+ 
+  
   @ViewChild('roundsInput')
   roundsInputReference!: ElementRef;
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 /*
 @Injectable({
   providedIn: 'root'
@@ -19,27 +20,39 @@ class Match {
 }
 
 class Bracket {
-  Rounds: number
+  Teams: number
+  TeamsList: string[]
   MatchList: Match[]
 
   constructor(r: number){
-    this.Rounds = r;
+    this.Teams = r;
     const m: Match[] = [];
+    const t: string[] = [];
     this.MatchList = m;
+    this.TeamsList = t;
   }
 }
 
 export class CreateBracketService {
-  private b = new Bracket(0);
+  b = new Bracket(0);
   getMatchList() {
     return this.b.MatchList;
   }
-  getRounds() {
-    return this.b.Rounds.toString();
+  getTeamsList() {
+    return this.b.TeamsList;
+  }
+  getTeams() {
+    return this.b.Teams.toString();
   }
 
-  createBracket(Rounds: number) {
+
+
+  createBracket(Teams: number) {
     // simple check, title must be at least 1 char
-    this.b.Rounds = Rounds;
+    this.b.Teams = Teams;
+    console.log(Teams)
+    for (let i = 0; i < Teams; i++) {
+      this.b.TeamsList.push("Team " + i.toString());
+    }
   }
 }
