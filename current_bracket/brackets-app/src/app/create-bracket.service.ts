@@ -63,10 +63,23 @@ export class CreateBracketService {
 
   }
 
-  createPairings(){
-    for (let i = 0; i < this.b.TeamsList.length / 2; i++) {
-      this.b.MatchList[i] = new Match(this.b.TeamsList[i], this.b.TeamsList[i+1],0,0);
+  createPairings() {
+    const shuffledTeams = this.shuffle(this.b.TeamsList);
+  
+    for (let i = 0; i < shuffledTeams.length; i += 2) {
+      const team1 = shuffledTeams[i];
+      const team2 = shuffledTeams[i + 1];
+      const newMatch = new Match(team1, team2, 0, 0);
+      this.b.MatchList.push(newMatch);
     }
-    console.log(this.b.MatchList[0].Member1 + " " + this.b.MatchList[0].Member2)
   }
+  
+  shuffle(array:any) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
 }
