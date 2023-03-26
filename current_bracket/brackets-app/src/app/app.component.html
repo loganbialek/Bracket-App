@@ -21,6 +21,12 @@
     margin: 0;
   }
 
+.team{
+  border: 4px solid rgb(0, 0, 0);
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
   .spacer {
     flex: 1;
   }
@@ -139,7 +145,27 @@
     margin-left: 60px;
   }
 
+  .brackets {
+    
+    top: 50%;
+    display: flex;
+    border: 1px solid gray;
+    align-items: center;
+    justify-content: space-between;
+  }
  
+  .Brack { 
+    display: inline-block;
+    flex-direction: row;
+    padding: 10px;
+    margin-bottom: 1rem; 
+    margin-left: 1rem; 
+    top: 50%;
+  }
+  .team {
+    top: 50%;
+  }
+
 
 
   a,
@@ -343,6 +369,11 @@
   <mat-slide-toggle>Round-Robin</mat-slide-toggle>
   <mat-slide-toggle>Double-Elimination</mat-slide-toggle>
 
+
+
+
+
+
   <!-- Stats Table -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -372,9 +403,15 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
-  
-
-
+  <div class="brackets" *ngIf="BracketList">
+    <div *ngFor="let Bracket of BracketList" class="Brack">
+      <div class="bracket" *ngIf="TeamsList">
+        <div *ngFor="let team of Bracket.TeamsList" class="team">
+          <button class="button button2" (click)="createBracket()"> {{ team }} </button> 
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>

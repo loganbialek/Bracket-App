@@ -23,6 +23,7 @@ class Bracket {
   Teams: number
   TeamsList: string[]
   MatchList: Match[]
+  Rounds: number
 
   constructor(r: number){
     this.Teams = r;
@@ -30,12 +31,17 @@ class Bracket {
     const t: string[] = [];
     this.MatchList = m;
     this.TeamsList = t;
+    this.Rounds = Math.ceil(Math.log2(r)) + 1;
   }
 }
 
 export class CreateBracketService {
+  bl: Bracket[] = [];
   b = new Bracket(0);
   
+  getBracketList() {
+    return this.bl;
+  }
   getMatchList() {
     return this.b.MatchList;
   }
@@ -58,15 +64,42 @@ export class CreateBracketService {
     for (let i = 0; i < Teams; i++) {
       console.log(this.b.TeamsList[i]);
     }
-
-
-
+    this.bl.push(this.b);
+    var t = this.b.Teams;
+    this.b.Rounds = Math.ceil(Math.log2(this.b.Teams)) + 1;
+    for (let i = 1; i <= this.b.Rounds; i++) {
+      t = Math.floor(t/2);
+      if(t == 1){
+        var bTemp = new Bracket(1);
+        bTemp.TeamsList.push("");
+        this.bl.push(bTemp);
+      }
+      else if(t % 2 != 0){
+        t = t + 1;
+        var bTemp = new Bracket(t);
+        for (let i = 1; i <= t; i++){
+          bTemp.TeamsList.push("");
+        }
+        this.bl.push(bTemp);
+      }
+      else{
+        var bTemp = new Bracket(t);
+        for (let i = 1; i <= t; i++){
+          bTemp.TeamsList.push("");
+        }
+        this.bl.push(bTemp);
+      }
+    }
   }
 
   createPairings(){
-    for (let i = 0; i < this.b.TeamsList.length / 2; i++) {
-      this.b.MatchList[i] = new Match(this.b.TeamsList[i], this.b.TeamsList[i+1],0,0);
+    for (let i = 0; i < this.b.TeamsList.length; i++) {
+      this.b.MatchList.push(new Match(this.b.TeamsList[i], this.b.TeamsList[i+1],0,0));
+      i++;
     }
-    console.log(this.b.MatchList[0].Member1 + " " + this.b.MatchList[0].Member2)
+    for (let i = 0; i < this.b.MatchList.length; i++) {
+      console.log(this.b.MatchList[i].Member1 + " " + this.b.MatchList[i].Member2)
+    }
+   
   }
 }

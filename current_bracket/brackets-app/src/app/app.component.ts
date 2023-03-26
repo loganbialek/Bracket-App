@@ -19,6 +19,12 @@ interface Match {
 	Member2Wins: number;
 }
 
+interface Bracket {
+  Teams:       number;
+  TeamsList: string[];
+  MatchList:  Match[];
+  Rounds:      number;
+}
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Gators', score: 100.79},
@@ -42,6 +48,8 @@ export class AppComponent implements OnInit {
 
   Teams:string = "";
   TeamsList: string[] | undefined;
+  MatchList: Match[] | undefined;
+  BracketList: Bracket[] | undefined;
 
   constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
 
@@ -49,6 +57,8 @@ export class AppComponent implements OnInit {
     
     // Read from getTitle which is on backend API. Convert back from JSON into a struct
     this.TeamsList = this.cbs.getTeamsList();
+    this.MatchList = this.cbs.getMatchList();
+    this.BracketList = this.cbs.getBracketList();
   }
 
   @ViewChild('roundsInput')
@@ -59,6 +69,7 @@ export class AppComponent implements OnInit {
       this.roundsInputReference.nativeElement.value
     );
     this.ngOnInit();
+    this.getBracketList();
   }
   createPairings(){
     this.cbs.createPairings();
@@ -69,5 +80,11 @@ export class AppComponent implements OnInit {
       console.log(this.cbs.getTeamsList()[i]);
     }
     return this.cbs.getTeamsList();
+  }
+  getMatchList() {
+    return this.cbs.getMatchList();
+  }
+  getBracketList() {
+    return this.cbs.getBracketList();
   }
 }
