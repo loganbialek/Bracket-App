@@ -1,34 +1,48 @@
 .bracket-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    align-items: center;
   }
   
   .round {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-right: 20px;
   }
   
   .match {
-    position: relative;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    height: 70px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 150px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
   }
   
   .team {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .connector {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    width: 150px;
-    height: 40
-  }  
+    width: 30px;
+    height: 50px;
+  }
+  
+  .line {
+    width: 2px;
+    height: 25px;
+    background-color: #ddd;
+    margin-bottom: 5px;
+  }
+  
