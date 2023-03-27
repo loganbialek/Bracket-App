@@ -47,7 +47,21 @@ export class AppComponent implements OnInit {
 
 
 
+  FinalsList = [
+    { Member1: 'Team 1', Member2: 'Team 2', Member1Wins: 2, Member2Wins: 1 },
+    { Member1: 'Team 3', Member2: 'Team 4', Member1Wins: 0, Member2Wins: 2 },
+    { Member1: 'Team 5', Member2: 'Team 6', Member1Wins: 1, Member2Wins: 2 },
+    { Member1: 'Team 7', Member2: 'Team 8', Member1Wins: 2, Member2Wins: 0 }
+  ];
   
+  SemifinalsList = [
+    { Member1: 'Team 1', Member2: 'Team 3', Member1Wins: 2, Member2Wins: 0 },
+    { Member1: 'Team 5', Member2: 'Team 7', Member1Wins: 1, Member2Wins: 2 }
+  ];
+  
+  WinnersList = [
+    { Member1: 'Team 1', Member2: 'Team 7', Member1Wins: 2, Member2Wins: 0 }
+  ];
   
 
 
