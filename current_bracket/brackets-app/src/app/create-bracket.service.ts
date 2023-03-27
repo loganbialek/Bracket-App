@@ -53,6 +53,20 @@ export class CreateBracketService {
     return this.b.Teams.toString();
   }
 
+  setTeamName(team:string, newName:string) {
+    for(let i = 0; i < this.bl.length; i++){
+      for(let j = 0; j < this.bl[i].MatchList.length; j++){
+        if(this.bl[i].MatchList[j].Member1 == team){
+          this.bl[i].MatchList[j].Member1 = newName;
+          continue;
+        }
+        else if(this.bl[i].MatchList[j].Member2 == team){
+          this.bl[i].MatchList[j].Member2 = newName;
+          continue;
+        }
+      }
+    }
+  }
 
 
   createBracket(Teams: number) {
