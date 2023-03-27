@@ -87,9 +87,7 @@ export class AppComponent implements OnInit {
   }
 
   createBracket() {
-    this.cbs.createBracket(
-      this.roundsInputReference.nativeElement.value
-    );
+    this.cbs.createBracket();
     this.ngOnInit();
     this.getBracketList();
   }

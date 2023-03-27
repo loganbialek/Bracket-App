@@ -393,13 +393,13 @@
 
   <input type="hidden" #selection>
 
-  <div class="card-container">
+  <div class="card-container" style="margin-bottom: 50px;">
     <input 
     type="text" 
     placeholder="Enter Team Name" 
     #nInput />
   <button (click)="addTeam()">Add Team</button> 
-</div>
+
 
 <!--
   <div *ngIf="TeamsList" class="wrapper">
@@ -412,10 +412,11 @@
   <!-- ToggleButtons -->
   
   <mat-slide-toggle>Single-Elimination</mat-slide-toggle>
-  <mat-slide-toggle>Round-Robin</mat-slide-toggle>
   <mat-slide-toggle>Double-Elimination</mat-slide-toggle>
 
+  <button (click)="createBracket()">Create Bracket</button> 
 
+</div>
 
 
 
@@ -452,6 +453,7 @@
   -->
 <div>
 
+  <div style="display: inline-flex">
   <button class="button button2" (click)="myFunction()">{{ eTN }}</button> 
   <div id="myDIV" style="display: none">
 
@@ -469,10 +471,10 @@
     </a>
   </div>
 
-
+</div>
 
   <div *ngIf="TeamsList" class="wrapper">
-    <div *ngFor="let team of TeamsList" class="team">
+    <div *ngFor="let team of TeamsList" class="t">
       {{ team }}
     </div>
   </div>

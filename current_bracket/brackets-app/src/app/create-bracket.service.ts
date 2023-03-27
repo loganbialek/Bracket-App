@@ -70,22 +70,15 @@ export class CreateBracketService {
     for(let i = 0; i < this.b.TeamsList.length; i++){
       if(this.b.TeamsList[i] == team){
         this.b.TeamsList[i] = newName;
-        break;
       }
     }
   }
 
 
-  createBracket(Teams: number) {
+  createBracket() {
     // simple check, title must be at least 1 char
-    this.b.Teams = Teams;
-    console.log(Teams)
-    for (let i = 1; i <= Teams; i++) {
-      this.b.TeamsList.push("Team " + i.toString());
-    }
-    for (let i = 0; i < Teams; i++) {
-      console.log(this.b.TeamsList[i]);
-    }
+    this.b.Teams = this.b.TeamsList.length;
+    var Teams = this.b.Teams;
 
     const shuffledTeams = this.shuffle(this.b.TeamsList);
   
@@ -230,6 +223,9 @@ export class CreateBracketService {
   }
 
   addTeam(team: string) {
+    if(this.b.TeamsList.includes(team)){
+      return;
+    }
     this.b.TeamsList.push(team);
   }
 
