@@ -65,6 +65,17 @@ export class CreateBracketService {
     for (let i = 0; i < Teams; i++) {
       console.log(this.b.TeamsList[i]);
     }
+
+    const shuffledTeams = this.shuffle(this.b.TeamsList);
+  
+    for (let i = 0; i < shuffledTeams.length; i += 2) {
+      const team1 = shuffledTeams[i];
+      const team2 = shuffledTeams[i + 1];
+      const newMatch = new Match(team1, team2, 0, 0);
+      this.b.MatchList.push(newMatch);
+    }
+
+
     this.bl.push(this.b);
     var t = this.b.Teams;
     this.b.Rounds = Math.ceil(Math.log2(this.b.Teams)) + 1;
@@ -73,6 +84,13 @@ export class CreateBracketService {
       if(t == 1){
         var bTemp = new Bracket(1);
         bTemp.TeamsList.push("");
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
         this.bl.push(bTemp);
       }
       else if(t % 2 != 0){
@@ -81,6 +99,13 @@ export class CreateBracketService {
         for (let i = 1; i <= t; i++){
           bTemp.TeamsList.push("");
         }
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
         this.bl.push(bTemp);
       }
       else{
@@ -88,6 +113,13 @@ export class CreateBracketService {
         for (let i = 1; i <= t; i++){
           bTemp.TeamsList.push("");
         }
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
         this.bl.push(bTemp);
       }
     }
@@ -105,6 +137,7 @@ export class CreateBracketService {
   }
 
   progressTeam(team: string){
+
     if(this.bl[this.currentBracket + 1].TeamsList.includes(team)){
       if(!this.bl[this.currentBracket + 1].TeamsList.includes(""))
       {
@@ -140,4 +173,39 @@ export class CreateBracketService {
       }
     }
   }
+
+  updateMatches(team:string){
+    var createMatch;
+    for(let i = 0; i < this.currentBracket + 2; i++){
+      createMatch = true;
+      for(let j = 0; j < this.bl[i].MatchList.length; j++){
+        if(this.bl[i].MatchList[j].Member1 == team || this.bl[i].MatchList[j].Member2 == team){
+          createMatch = false;
+          break;
+        }
+      }
+      if(createMatch){
+        for(let k = 0; k < this.bl[i].MatchList.length; k++){
+          if(this.bl[i].MatchList[k].Member1 == ""){
+            this.bl[i].MatchList[k].Member1 = team;
+            return;
+          }
+          else if(this.bl[i].MatchList[k].Member2 == ""){
+            this.bl[i].MatchList[k].Member2 = team;
+            return;
+          }
+        }
+      }
+    }
+
+  }
+
+  shuffle(array:any) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 }
