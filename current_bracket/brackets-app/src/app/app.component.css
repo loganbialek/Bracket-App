@@ -9,12 +9,27 @@
 
 /* Make the bracket container fill the entire screen */
 .bracket-container {
+  max-width: 215px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   background-color: var(--secondary-color);
+}
+
+.buttonboxes {
+  font-size: 20px;
+  min-height: 50px;
+  max-height: fit-content;
+  min-width: 100px;
+  max-width: fit-content;
+  border-radius: 20px;
+  background-color: transparent;
+  outline: none;
+  outline-color: none;
+  outline-style: none;
+  
 }
 
 /* Give the rounds a more sleek and modern look */
@@ -28,11 +43,11 @@
   
   background-color: white;
   transition: all 0.3s ease;
-  transform: scale(1);
+  transform: scale(0.5);
 }
 
 .round:hover {
-  transform: scale(1.05);
+  transform: scale(0.55);
 }
 
 /* Add a futuristic gradient background to the team boxes */
