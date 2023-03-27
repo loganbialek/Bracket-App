@@ -407,7 +407,7 @@
     <div *ngFor="let Bracket of BracketList" class="Brack">
       <div class="bracket" *ngIf="TeamsList">
         <div *ngFor="let team of Bracket.TeamsList" class="team">
-          <button class="button button2" (click)="createBracket()"> {{ team }} </button> 
+          <button class="button button2" (click)="progressTeam(team)"> {{ team }} </button> 
         </div>
       </div>
     </div>

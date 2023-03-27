@@ -36,6 +36,7 @@ class Bracket {
 }
 
 export class CreateBracketService {
+  currentBracket = 0;
   bl: Bracket[] = [];
   b = new Bracket(0);
   
@@ -101,5 +102,42 @@ export class CreateBracketService {
       console.log(this.b.MatchList[i].Member1 + " " + this.b.MatchList[i].Member2)
     }
    
+  }
+
+  progressTeam(team: string){
+    if(this.bl[this.currentBracket + 1].TeamsList.includes(team)){
+      if(!this.bl[this.currentBracket + 1].TeamsList.includes(""))
+      {
+        this.currentBracket++;
+        for(let i = 0; i < this.bl[this.currentBracket + 1].TeamsList.length; i++){
+          if(this.bl[this.currentBracket + 1].TeamsList[i] == "")
+          {
+            this.bl[this.currentBracket + 1].TeamsList[i] = team;
+            return;
+          }
+        }
+      }
+      return;
+    }
+    for(let i = 0; i < this.bl[this.currentBracket + 1].TeamsList.length; i++){
+      if(this.bl[this.currentBracket + 1].TeamsList[i] == "")
+      {
+        this.bl[this.currentBracket + 1].TeamsList[i] = team;
+        return;
+      }
+    }
+    this.currentBracket++;
+
+    if(this.currentBracket == this.b.Rounds){
+
+    }
+
+    for(let i = 0; i < this.bl[this.currentBracket + 1].TeamsList.length; i++){
+      if(this.bl[this.currentBracket + 1].TeamsList[i] == "")
+      {
+        this.bl[this.currentBracket + 1].TeamsList[i] = team;
+        return;
+      }
+    }
   }
 }

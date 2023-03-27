@@ -87,4 +87,7 @@ export class AppComponent implements OnInit {
   getBracketList() {
     return this.cbs.getBracketList();
   }
+  progressTeam(team: string) {
+    return this.cbs.progressTeam(team);
+  }
 }
