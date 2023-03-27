@@ -370,33 +370,26 @@
 </div>
 
 <div class="content" role="main">
-
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <div> <img  class="images" src="https://static.vecteezy.com/system/resources/previews/006/425/320/original/flat-design-trophy-trophy-isolated-on-white-background-free-vector.jpg" style= "width: 100px;height: 100px; border-radius: 50%; margin-right: -40px; margin-left: -50px;" /></div>
-
-    <span>Generate Your Bracket Now</span>
-
-  </div>
-
  
 
 
-  <!-- Start Prompt -->
-  <h2>Get Started</h2>
-  <p>Enter Your Information below
+  <!-- interactive title element -->
+  <!DOCTYPE html>
+<html>
+<head>
+	<title>Interactive Title</title>
+</head>
+<body>
+	<h1><span id="myTitle" contentEditable>Insert Bracket Name</span></h1>
+	<script>
+		function changeTitle() {
+			var newTitle = document.getElementById("titleInput").value;
+			document.getElementById("myTitle").innerHTML = newTitle;
+		}
+	</script>
+</body>
+</html>
 
-    {{ Teams }} app is running!
-    {{ Teams }}
-  </p>
-
-
-  
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>Hurry up and get your stuff in there!</p>
 
   <input type="hidden" #selection>
 
