@@ -6,14 +6,7 @@
     margin-top: 30px;
   }
 
-  .card-container{
-    position: relative;
-    align-items: left;
-    flex-direction: row;
-    justify-content: left;
-    min-width: 140px;
-    max-width: 140px;
-  }
+ 
   
   .round {
     display: flex;
