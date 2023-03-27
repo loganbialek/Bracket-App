@@ -50,6 +50,9 @@ export class AppComponent implements OnInit {
   TeamsList: string[] | undefined;
   MatchList: Match[] | undefined;
   BracketList: Bracket[] | undefined;
+  MatchListOne: Match[] | undefined;
+
+  eTN:string = "Edit Team Name";
 
   constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
 
@@ -59,10 +62,26 @@ export class AppComponent implements OnInit {
     this.TeamsList = this.cbs.getTeamsList();
     this.MatchList = this.cbs.getMatchList();
     this.BracketList = this.cbs.getBracketList();
+    this.MatchListOne = this.cbs.getBracketList()[0].MatchList;
   }
 
   @ViewChild('roundsInput')
   roundsInputReference!: ElementRef;
+
+  @ViewChild('nameInput')
+  nameInputReference!: ElementRef;
+
+  myFunction() {
+    var x = document.getElementById("myDIV") as HTMLSelectElement;
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      this.eTN = "Close";
+    } else {
+      x.style.display = "none";
+      this.eTN = "Edit Team Name";
+    }
+    
+  }
 
   createBracket() {
     this.cbs.createBracket(
@@ -73,6 +92,11 @@ export class AppComponent implements OnInit {
   }
   createPairings(){
     this.cbs.createPairings();
+  }
+
+  setTeamName(){
+    var e = document.getElementById("editName") as HTMLSelectElement;
+    this.cbs.setTeamName(e.options[e.selectedIndex].text,this.nameInputReference.nativeElement.value);
   }
 
   getTeamsList() {
