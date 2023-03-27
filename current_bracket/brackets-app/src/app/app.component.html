@@ -396,11 +396,11 @@
   <div class="card-container">
     <input 
     type="text" 
-    placeholder="How many Teams" 
-    #roundsInput />
-  <button (click)="createBracket()">Add Teams</button> 
+    placeholder="Enter Team Name" 
+    #nInput />
+  <button (click)="addTeam()">Add Team</button> 
+</div>
 
-  
 <!--
   <div *ngIf="TeamsList" class="wrapper">
     <div *ngFor="let team of TeamsList" class="team">
@@ -469,6 +469,13 @@
     </a>
   </div>
 
+
+
+  <div *ngIf="TeamsList" class="wrapper">
+    <div *ngFor="let team of TeamsList" class="team">
+      {{ team }}
+    </div>
+  </div>
 
   <!---
   <div class="dropdown-content">

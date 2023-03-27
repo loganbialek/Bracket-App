@@ -66,6 +66,13 @@ export class CreateBracketService {
         }
       }
     }
+
+    for(let i = 0; i < this.b.TeamsList.length; i++){
+      if(this.b.TeamsList[i] == team){
+        this.b.TeamsList[i] = newName;
+        break;
+      }
+    }
   }
 
 
@@ -220,6 +227,10 @@ export class CreateBracketService {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  }
+
+  addTeam(team: string) {
+    this.b.TeamsList.push(team);
   }
 
 }

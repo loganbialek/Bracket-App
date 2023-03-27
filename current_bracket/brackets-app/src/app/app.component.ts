@@ -71,6 +71,9 @@ export class AppComponent implements OnInit {
   @ViewChild('nameInput')
   nameInputReference!: ElementRef;
 
+  @ViewChild('nInput')
+  nInputReference!: ElementRef;
+
   myFunction() {
     var x = document.getElementById("myDIV") as HTMLSelectElement;
     if (x.style.display === "none") {
@@ -89,6 +92,11 @@ export class AppComponent implements OnInit {
     );
     this.ngOnInit();
     this.getBracketList();
+  }
+  addTeam() {
+    this.cbs.addTeam(
+      this.nInputReference.nativeElement.value
+    );
   }
   createPairings(){
     this.cbs.createPairings();
