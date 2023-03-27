@@ -370,13 +370,13 @@
   <button (click)="createBracket()">Add Teams</button> 
 
   <button (click)="createPairings()">Create Pairings</button> 
-
+<!--
   <div *ngIf="TeamsList" class="wrapper">
     <div *ngFor="let team of TeamsList" class="team">
       {{ team }}
     </div>
   </div>
- 
+ -->
 
   <!-- ToggleButtons -->
   
@@ -390,23 +390,24 @@
 
 
   <!-- Stats Table -->
+  <!--
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     
   
-    <!-- Position Column -->
+    
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
     </ng-container>
   
-    <!-- Name Column -->
+    
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
   
-    <!-- Weight Column -->
+   
     <ng-container matColumnDef="weight">
       <th mat-header-cell *matHeaderCellDef> Score </th>
       <td mat-cell *matCellDef="let element"> {{element.score}} </td>
@@ -417,6 +418,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  -->
   
   <div class="brackets" *ngIf="BracketList">
     <div *ngFor="let Bracket of BracketList" class="Brack">
