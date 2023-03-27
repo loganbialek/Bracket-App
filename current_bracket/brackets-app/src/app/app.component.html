@@ -412,7 +412,6 @@
   <!-- ToggleButtons -->
   
   <mat-slide-toggle>Single-Elimination</mat-slide-toggle>
-  <mat-slide-toggle>Round-Robin</mat-slide-toggle>
   <mat-slide-toggle>Double-Elimination</mat-slide-toggle>
 
 
@@ -452,7 +451,7 @@
   -->
 <div>
 
-  <button class="button button2" (click)="myFunction()">{{ eTN }}</button> 
+  <button class="button button2" (click)="myFunction()" style="display: none" id="eN">{{ eTN }}</button> 
   <div id="myDIV" style="display: none">
 
     <select name="editName" id="editName">
@@ -507,7 +506,7 @@
 
 
                   <span [ngStyle]="{ 'font-weight': match.Member1Wins > match.Member2Wins ? 'bold' : 'normal' }">
-                    ({{ match.Member1Wins }})
+                    <button class="buttonboxes button2" (click)="getTeamsList()">  ({{ match.Member1Wins }}) </button> 
                   </span>
                 </div>
                 <div class="team">
@@ -520,7 +519,7 @@
                   </div>
                   <p>&nbsp; &nbsp; </p>
                   <span [ngStyle]="{ 'font-weight': match.Member2Wins > match.Member1Wins ? 'bold' : 'normal' }">
-                    ({{ match.Member2Wins }})
+                    <button class="buttonboxes button2" (click)="getTeamsList()">  ({{ match.Member2Wins }}) </button> 
                   </span>
                 </div>
               </div>
