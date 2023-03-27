@@ -180,7 +180,7 @@
     background-color: #ddd;
     margin-bottom: 5px;
   }
-  
+
 
 
   a,
@@ -369,7 +369,7 @@
     #roundsInput />
   <button (click)="createBracket()">Add Teams</button> 
 
-  <button (click)="createPairings()">Create Pairings</button> 
+  
 <!--
   <div *ngIf="TeamsList" class="wrapper">
     <div *ngFor="let team of TeamsList" class="team">
@@ -431,13 +431,14 @@
               <div class="match" [ngClass]="{ 'final': i == 0 }">
                 <div class="team">
                   <button class="button button2" (click)="progressTeam(match.Member1)"> {{ match.Member1 }} </button> 
-                  
+                  <p>&nbsp; &nbsp; </p>
                   <span [ngStyle]="{ 'font-weight': match.Member1Wins > match.Member2Wins ? 'bold' : 'normal' }">
                     ({{ match.Member1Wins }})
                   </span>
                 </div>
                 <div class="team">
                   <button class="button button2" (click)="progressTeam(match.Member2)"> {{ match.Member2 }} </button> 
+                  <p>&nbsp; &nbsp; </p>
                   <span [ngStyle]="{ 'font-weight': match.Member2Wins > match.Member1Wins ? 'bold' : 'normal' }">
                     ({{ match.Member2Wins }})
                   </span>
