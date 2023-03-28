@@ -94,6 +94,9 @@ export class CreateBracketService {
     var t = this.b.Teams;
     this.b.Rounds = Math.ceil(Math.log2(this.b.Teams)) + 1;
     for (let i = 1; i <= this.b.Rounds; i++) {
+      if(this.bl.length == this.b.Rounds - 1){
+        break;
+      }
       t = Math.floor(t/2);
       if(t == 1){
         var bTemp = new Bracket(1);
