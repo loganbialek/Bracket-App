@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
   MatchList: Match[] | undefined;
   BracketList: Bracket[] | undefined;
   MatchListOne: Match[] | undefined;
+  Winner: string = "";
 
   eTN:string = "Edit Team Name";
 
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
     this.MatchList = this.cbs.getMatchList();
     this.BracketList = this.cbs.getBracketList();
     this.MatchListOne = this.cbs.getBracketList()[0].MatchList;
+    this.Winner = this.cbs.getWinner();
   }
 
   @ViewChild('roundsInput')
@@ -90,6 +92,13 @@ export class AppComponent implements OnInit {
     this.cbs.createBracket();
     this.ngOnInit();
     this.getBracketList();
+
+    var x = document.getElementById("winner") as HTMLSelectElement;
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
   addTeam() {
     this.cbs.addTeam(
@@ -119,7 +128,10 @@ export class AppComponent implements OnInit {
   }
   progressTeam(team: string) {
     this.cbs.progressTeam(team);
+    this.Winner = this.cbs.getWinner();
+    console.log(this.Winner)
     this.cbs.updateMatches(team);
+
     return 
   }
 }

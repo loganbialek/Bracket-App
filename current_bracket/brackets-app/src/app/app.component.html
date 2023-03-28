@@ -188,7 +188,6 @@
     
     top: 50%;
     display: flex;
-    border: 1px solid gray;
     align-items: center;
     justify-content: space-between;
   }
@@ -491,8 +490,8 @@
   </div>
   -->
 
-
-  <div class="brackets" *ngIf="BracketList">
+<div style="display: flex">
+  <div class="brackets" *ngIf="BracketList" style="float: left;">
     <div *ngFor="let Bracket of BracketList" class="Brack">
       <div class="bracket-container">
         <div class="round">
@@ -540,6 +539,26 @@
   </div>
   </div>
   </div>
+
+  <div class="Brack" id="winner" style="display: none">
+    <div class="bracket-container">
+      <div class="round">
+          <div class="match-container">
+            <div class="match" style="display: block">
+              <div class="team" style="margin-top: 30%;">
+                {{ Winner }}
+              </div>
+              <p style="text-align: center; font-size: 30px;">Winner</p>
+            </div>
+          </div>
+      </div>
+      </div>
+</div>
+  </div>
+
+
+</div>
+
 </div>
 <router-outlet></router-outlet>
 
