@@ -129,7 +129,6 @@ export class AppComponent implements OnInit {
   progressTeam(team: string) {
     this.cbs.progressTeam(team);
     this.Winner = this.cbs.getWinner();
-    console.log(this.Winner)
     this.cbs.updateMatches(team);
 
     return 
