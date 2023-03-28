@@ -159,6 +159,10 @@ export class CreateBracketService {
   }
 
   progressTeam(team: string){
+    if(!this.bl[this.bl.length - 1].TeamsList.includes("")){
+      this.winner = team;
+      return;
+    }
 
     if(this.bl[this.currentBracket + 1].TeamsList.includes(team)){
       if(!this.bl[this.currentBracket + 1].TeamsList.includes(""))
