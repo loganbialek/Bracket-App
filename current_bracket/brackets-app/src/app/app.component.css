@@ -19,7 +19,7 @@ background-color: var(--primary-color);
 }
 
 .buttonboxes {
-font-size: 20px;
+font-size: 15px;
 min-height: 50px;
 max-height: fit-content;
 min-width: 100px;
