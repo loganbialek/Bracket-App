@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
     this.MatchList = this.cbs.getMatchList();
     this.BracketList = this.cbs.getBracketList();
     this.MatchListOne = this.cbs.getBracketList()[0].MatchList;
+    this.Winner = this.cbs.getWinner();
   }
 
   @ViewChild('roundsInput')
@@ -85,6 +86,13 @@ export class AppComponent implements OnInit {
   }
 
   createBracket() {
+    var x = document.getElementById("winner") as HTMLSelectElement;
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+
     var x = document.getElementById("eN") as HTMLSelectElement;
     if (x.style.display === "none") {
       x.style.display = "block";

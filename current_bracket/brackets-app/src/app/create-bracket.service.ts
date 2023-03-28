@@ -36,6 +36,7 @@ class Bracket {
 }
 
 export class CreateBracketService {
+  winner:string = "";
   currentBracket = 0;
   bl: Bracket[] = [];
   b = new Bracket(0);
@@ -66,6 +67,10 @@ export class CreateBracketService {
         }
       }
     }
+  }
+
+  getWinner(){
+    return this.winner;
   }
 
 
