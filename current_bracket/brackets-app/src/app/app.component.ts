@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
   MatchList: Match[] | undefined;
   BracketList: Bracket[] | undefined;
   MatchListOne: Match[] | undefined;
+  Winner:string = '";'
 
   eTN:string = "Edit Team Name";
 
