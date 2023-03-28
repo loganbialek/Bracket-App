@@ -112,6 +112,7 @@ export class AppComponent implements OnInit {
   setTeamName(){
     var e = document.getElementById("editName") as HTMLSelectElement;
     this.cbs.setTeamName(e.options[e.selectedIndex].text,this.nameInputReference.nativeElement.value);
+    this.Winner = this.cbs.getWinner();
   }
 
   getTeamsList() {
