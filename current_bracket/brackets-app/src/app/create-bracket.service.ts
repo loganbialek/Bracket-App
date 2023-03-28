@@ -55,6 +55,9 @@ export class CreateBracketService {
   }
 
   setTeamName(team:string, newName:string) {
+    if(this.winner == team){
+      this.winner = newName;
+    }
     for(let i = 0; i < this.bl.length; i++){
       for(let j = 0; j < this.bl[i].MatchList.length; j++){
         if(this.bl[i].MatchList[j].Member1 == team){

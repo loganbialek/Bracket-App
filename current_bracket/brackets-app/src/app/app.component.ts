@@ -112,6 +112,7 @@ export class AppComponent implements OnInit {
   setTeamName(){
     var e = document.getElementById("editName") as HTMLSelectElement;
     this.cbs.setTeamName(e.options[e.selectedIndex].text,this.nameInputReference.nativeElement.value);
+    this.Winner = this.cbs.getWinner();
   }
 
   getTeamsList() {
@@ -128,6 +129,7 @@ export class AppComponent implements OnInit {
   }
   progressTeam(team: string) {
     this.cbs.progressTeam(team);
+    this.Winner = this.cbs.getWinner();
     this.cbs.updateMatches(team);
     return 
   }
