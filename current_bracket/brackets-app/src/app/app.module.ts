@@ -14,6 +14,7 @@ import { HelloWorldService } from './hello-world.service';
 import { CreateBracketService } from './create-bracket.service';
 import { AwsComponent } from './aws/aws.component';
 import { AngularComponent } from './angular/angular.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,8 @@ import { AngularComponent } from './angular/angular.component';
     MatSlideToggleModule,
     MatTableModule,
     HttpClientModule,
-    BrowserAnimationsModule
-     
+    BrowserAnimationsModule,
+    FormsModule
     
   ],
   providers: [

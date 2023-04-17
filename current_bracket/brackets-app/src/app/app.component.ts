@@ -4,6 +4,8 @@ import {environment} from '../environments/environment';
 import { SendMatchesService } from './send-matches.service';
 import { HelloWorldService } from './hello-world.service';
 import { CreateBracketService } from './create-bracket.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 export interface PeriodicElement {
   name: string;
@@ -53,9 +55,12 @@ export class AppComponent implements OnInit {
   MatchListOne: Match[] | undefined;
   Winner:string = '";'
 
+  isChecked = false;
+  isCheckedSingle = false;
+
   eTN:string = "Edit Team Name";
 
-  constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
+  constructor(private hw: HelloWorldService, private cbs: CreateBracketService,private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
     
@@ -65,6 +70,7 @@ export class AppComponent implements OnInit {
     this.BracketList = this.cbs.getBracketList();
     this.MatchListOne = this.cbs.getBracketList()[0].MatchList;
     this.Winner = this.cbs.getWinner();
+    enableWifi: '';
   }
 
   @ViewChild('roundsInput')
@@ -99,9 +105,17 @@ export class AppComponent implements OnInit {
     } else {
       x.style.display = "none";
     }
-    this.cbs.createBracket(
-      this.roundsInputReference.nativeElement.value
-    );
+    if((!this.isChecked) && (this.isCheckedSingle)){
+      this.cbs.createBracket(
+        this.roundsInputReference.nativeElement.value
+      );
+    }
+    else if((this.isChecked) && (!this.isCheckedSingle)){
+      this.cbs.createBracketDouble(
+        this.roundsInputReference.nativeElement.value
+      );
+    }
+
     this.ngOnInit();
     this.getBracketList();
   }
