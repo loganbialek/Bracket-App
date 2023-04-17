@@ -4,6 +4,8 @@ import {environment} from '../environments/environment';
 import { SendMatchesService } from './send-matches.service';
 import { HelloWorldService } from './hello-world.service';
 import { CreateBracketService } from './create-bracket.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 export interface PeriodicElement {
   name: string;
@@ -52,10 +54,11 @@ export class AppComponent implements OnInit {
   BracketList: Bracket[] | undefined;
   MatchListOne: Match[] | undefined;
   Winner: string = "";
-
+  isChecked = false;
+  isCheckedSingle = false;
   eTN:string = "Edit Team Name";
 
-  constructor(private hw: HelloWorldService, private cbs: CreateBracketService) {}
+  constructor(private hw: HelloWorldService, private cbs: CreateBracketService,private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
     
@@ -89,7 +92,13 @@ export class AppComponent implements OnInit {
   }
 
   createBracket() {
-    this.cbs.createBracket();
+    if((!this.isChecked) && (this.isCheckedSingle)){
+      this.cbs.createBracket();
+    }
+    else if((this.isChecked) && (!this.isCheckedSingle)){
+      this.cbs.createBracketDouble();
+    }
+    
     this.ngOnInit();
     this.getBracketList();
 

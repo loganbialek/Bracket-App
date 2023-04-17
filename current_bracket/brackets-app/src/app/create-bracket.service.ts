@@ -24,6 +24,7 @@ class Bracket {
   TeamsList: string[]
   MatchList: Match[]
   Rounds: number
+  isDouble: boolean
 
   constructor(r: number){
     this.Teams = r;
@@ -31,6 +32,7 @@ class Bracket {
     const t: string[] = [];
     this.MatchList = m;
     this.TeamsList = t;
+    this.isDouble = false;
     this.Rounds = Math.ceil(Math.log2(r)) + 1;
   }
 }
@@ -162,12 +164,20 @@ export class CreateBracketService {
   }
 
   progressTeam(team: string){
-
     if(!this.bl[this.bl.length - 1].TeamsList.includes("")){
+      for(let i = 0; i < this.bl.length; i++){
+        for(let j = 0; j < this.bl[i].MatchList.length; j++){
+          if(this.bl[i].MatchList[j].Member1 == ""){
+            return
+          }
+          else if(this.bl[i].MatchList[j].Member2 == ""){
+            return
+          }
+        }
+      }
       this.winner = team;
       return;
     }
-
 
     if(this.bl[this.currentBracket + 1].TeamsList.includes(team)){
       if(!this.bl[this.currentBracket + 1].TeamsList.includes(""))
@@ -192,7 +202,9 @@ export class CreateBracketService {
     }
     this.currentBracket++;
 
+    if(this.currentBracket == this.b.Rounds){
 
+    }
 
     for(let i = 0; i < this.bl[this.currentBracket + 1].TeamsList.length; i++){
       if(this.bl[this.currentBracket + 1].TeamsList[i] == "")
@@ -244,4 +256,77 @@ export class CreateBracketService {
     this.b.TeamsList.push(team);
   }
 
+  createBracketDouble() {
+    // simple check, title must be at least 1 char
+    this.b.Teams = this.b.TeamsList.length;
+    var Teams = this.b.Teams;
+
+    const shuffledTeams = this.shuffle(this.b.TeamsList);
+  
+    for (let i = 0; i < shuffledTeams.length; i += 2) {
+      const team1 = shuffledTeams[i];
+      const team2 = shuffledTeams[i + 1];
+      const newMatch = new Match(team1, team2, 0, 0);
+      this.b.MatchList.push(newMatch);
+    }
+
+
+    this.bl.push(this.b);
+    var t = this.b.Teams;
+    this.b.Rounds = Math.ceil(Math.log2(this.b.Teams)) + 1;
+    for (let i = 1; i <= this.b.Rounds; i++) {
+      if(this.bl.length == this.b.Rounds - 1){
+        break;
+      }
+      t = Math.floor(t/2);
+      if(t == 1){
+        var bTemp = new Bracket(1);
+        bTemp.TeamsList.push("");
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length + 2; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
+        this.bl.push(bTemp);
+      }
+      else if(t % 2 != 0){
+        t = t + 1;
+        var bTemp = new Bracket(t);
+        for (let i = 1; i <= t; i++){
+          bTemp.TeamsList.push("");
+        }
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length + 2; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
+        this.bl.push(bTemp);
+      }
+      else{
+        var bTemp = new Bracket(t);
+        for (let i = 1; i <= t; i++){
+          bTemp.TeamsList.push("");
+        }
+
+        const shuffledTeams = this.shuffle(bTemp.TeamsList);
+  
+        for (let i = 0; i < shuffledTeams.length + 2; i += 2) {
+          bTemp.MatchList.push(new Match("","",0,0));
+        }
+
+        this.bl.push(bTemp);
+      }
+    }
+  }
+
 }
+
+
+
+
+
+
